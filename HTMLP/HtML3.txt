@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Madhu's Colorful Portfolio</title>
+  <title>Madhu's Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
       margin: 0;
@@ -11,28 +12,26 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #f3f0ff;
       color: #333;
     }
 
-    /* Header */
     header {
       background-color: #6a1b9a;
-      color: #fff;
+      color: white;
       padding: 25px;
       text-align: center;
     }
 
-    /* Navigation */
     nav {
       background-color: #8e24aa;
     }
 
     nav ul {
+      list-style: none;
       display: flex;
       justify-content: center;
-      list-style: none;
     }
 
     nav li {
@@ -52,18 +51,14 @@
       border-radius: 5px;
     }
 
-    /* Main Content */
-    main {
-      padding: 40px 20px;
-    }
-
-    .projects {
+    section {
+      padding: 50px 20px;
       max-width: 1000px;
       margin: auto;
     }
 
-    .project-card {
-      background-color: #ffffff;
+    .projects .project-card {
+      background-color: white;
       padding: 20px;
       margin-bottom: 20px;
       border-left: 6px solid #6a1b9a;
@@ -71,25 +66,29 @@
       transition: transform 0.2s;
     }
 
-    .project-card:hover {
+    .projects .project-card:hover {
       transform: scale(1.02);
     }
 
-    .project-card:nth-child(2) {
+    .projects .project-card:nth-child(2) {
       border-left-color: #ef6c00;
     }
 
-    .project-card:nth-child(3) {
+    .projects .project-card:nth-child(3) {
       border-left-color: #00897b;
     }
 
-    /* Footer */
     footer {
       background-color: #6a1b9a;
       color: white;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       margin-top: 40px;
+    }
+
+    /* Smooth scroll for internal links */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
@@ -101,33 +100,55 @@
 
   <nav>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <main>
-    <section class="projects">
-      <h2 style="text-align:center; margin-bottom: 30px;">My Projects</h2>
+  <!-- Home Section -->
+  <section id="home">
+    <h2>Welcome to My Portfolio</h2>
+    <p>This is the homepage of my personal portfolio website. Explore my work, skills, and contact details.</p>
+  </section>
 
-      <div class="project-card">
-        <h3>News Portal Website</h3>
-        <p>A responsive news portal built using HTML frames and multi-page layout.</p>
-      </div>
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I'm Madhu, a passionate web developer and cloud enthusiast. I enjoy building creative, user-friendly websites and learning modern technologies like AWS and JavaScript.</p>
+  </section>
 
-      <div class="project-card">
-        <h3>Quiz App</h3>
-        <p>A movie-themed quiz app using HTML, CSS, JavaScript with certificate download option.</p>
-      </div>
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <h2 style="text-align:center; margin-bottom: 30px;">My Projects</h2>
 
-      <div class="project-card">
-        <h3>AWS Certification Tracker</h3>
-        <p>Helps users track their AWS Cloud Practitioner exam preparation progress.</p>
-      </div>
-    </section>
-  </main>
+    <div class="project-card">
+      <h3>News Portal Website</h3>
+      <p>A responsive news portal using HTML and frames with multiple pages and categories.</p>
+    </div>
+
+    <div class="project-card">
+      <h3>Quiz App</h3>
+      <p>Movie-themed interactive quiz with score tracking and certificate download using JavaScript.</p>
+    </div>
+
+    <div class="project-card">
+      <h3>AWS Certification Tracker</h3>
+      <p>Web tool to track AWS Cloud Practitioner exam preparation and practice quizzes.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>You can reach me through:</p>
+    <ul>
+      <li>Email: madhu@example.com</li>
+      <li>Phone: +91-98765-43210</li>
+      <li>LinkedIn: <a href="#" target="_blank">linkedin.com/in/madhu</a></li>
+    </ul>
+  </section>
 
   <footer>
     <p>&copy; 2025 Madhu. All rights reserved.</p>
