@@ -12,13 +12,11 @@ Variable capital is 67
 Variable CaPiTaL is 
 
 
-2.INPUT
-Create a PHP program to display the division table using for-loop.
+2.Create a PHP program to display the division table using for-loop.
 1 2 3
 1 1 0.5 0.33
 2 2 1 0.66
 3 3 1.5 1
-
 
 OUTPUT
 <?php
@@ -42,8 +40,7 @@ $animal = “antelope”; $animal_heads = 1; $animal_legs = 4;
 echo“The $animal has $animal_heads head(s).”;
 echo“The $animal has $animal_legs leg(s).”;
 
-output:
-
+Output:
 The antelope has 1 head(s).
 The antelope has 4 leg(s).
 
