@@ -93,6 +93,340 @@ Total Cost: ₹231.00
 
 === Code Execution Successful ===
 
+8. A customer visits a shop to buy a soft drink; he has two options:
+Drink A cost is Rs.25 and the size of the bottle is 11.
+Drink B cost is Rs.23 and its size of the bottle is 9.
+
+<?php
+function deal() {
+    $costA = 25;
+    $sizeA = 11;
+    $costB = 23;
+    $sizeB = 9;
+
+    $unitPriceA = $costA / $sizeA; // cost per ml for A
+    $unitPriceB = $costB / $sizeB; // cost per ml for B
+
+    echo "Drink A: ₹$costA for $sizeA units → ₹" . round($unitPriceA, 2) . " per unit<br>";
+    echo "Drink B: ₹$costB for $sizeB units → ₹" . round($unitPriceB, 2) . " per unit<br><br>";
+
+    if ($unitPriceA < $unitPriceB) {
+        echo "➡️ Choose Drink A to save money.";
+    } elseif ($unitPriceB < $unitPriceA) {
+        echo "➡️ Choose Drink B to save money.";
+    } else {
+        echo "Both drinks offer the same value.";
+    }
+}
+
+deal();
+?>
+
+
+OUTPUT:
+Drink A: ₹25 for 11 units → ₹2.27 per unit  
+Drink B: ₹23 for 9 units → ₹2.56 per unit  
+Choose Drink A to save money.
+
+9.Predict the output of the following snippet:
+
+$this = “this”; $that = “that”; $the_other = 2.2000000000;
+print(“$this,$not_set,$that+$the_other”);
+
+CORRECTED INPUT:
+$this = "this";
+$that = "that";
+$the_other = 2.2000000000;
+print("$this,$not_set,$that+$the_other");
+
+OUTPUT:0
+this,,that+2.2
+
+10. Develop a program to check student grades based on marks using a loop.
+<?php
+if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST") {
+    $names = $_POST['name'];
+    $marks = $_POST['marks'];
+
+    for ($i = 0; $i < count($names); $i++) {
+        $grade = "";
+        if ($marks[$i] >= 90) {
+            $grade = "A";
+        } elseif ($marks[$i] >= 80) {
+            $grade = "B";
+        } elseif ($marks[$i] >= 70) {
+            $grade = "C";
+        } elseif ($marks[$i] >= 60) {
+            $grade = "D";
+        } else {
+            $grade = "F";
+        }
+
+        echo $names[$i] . " - Marks: " . $marks[$i] . " - Grade: " . $grade . "<br>";
+    }
+} else {
+    ?>
+    <form method="post">
+        <h3>Enter Student Marks</h3>
+        Student 1: <input type="text" name="name[]" placeholder="Name">
+        Marks: <input type="number" name="marks[]" min="0" max="100"><br><br>
+
+        Student 2: <input type="text" name="name[]" placeholder="Name">
+        Marks: <input type="number" name="marks[]" min="0" max="100"><br><br>
+
+        Student 3: <input type="text" name="name[]" placeholder="Name">
+        Marks: <input type="number" name="marks[]" min="0" max="100"><br><br>
+
+        <input type="submit" value="Check Grades">
+    </form>
+    <?php
+}
+?>
+
+
+11.Develop a PHP program to show days of the week using switch cases.
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dayNumber = $_POST['day'];
+
+    switch ($dayNumber) {
+        case 1:
+            $message = "Today is Monday";
+            break;
+        case 2:
+            $message = "Today is Tuesday";
+            break;
+        case 3:
+            $message = "Today is Wednesday";
+            break;
+        case 4:
+            $message = "Today is Thursday";
+            break;
+        case 5:
+            $message = "Today is Friday";
+            break;
+        case 6:
+            $message = "Today is Saturday";
+            break;
+        case 7:
+            $message = "Today is Sunday";
+            break;
+        default:
+            $message = "Invalid number! Please enter a number between 1 and 7.";
+    }
+
+    echo "<h3>$message</h3>";
+}
+?>
+
+<form method="post">
+    Enter a number (1-7): 
+    <input type="number" name="day" min="1" max="7" required>
+    <input type="submit" value="Show Day">
+</form>
+
+12. Write a program to check student grade based on marks:
+Conditions:
+If marks are 75% or more, the grade will be First Class.
+If marks between 60% to 74%, grade will be second class.
+If marks between 40% to 59%, grade will be third class.
+If marks are less than 40%, students will be Fail.
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $marks = $_POST['marks'];
+
+    if ($marks >= 75) {
+        $grade = "First Class";
+    } elseif ($marks >= 60 && $marks <= 74) {
+        $grade = "Second Class";
+    } elseif ($marks >= 40 && $marks <= 59) {
+        $grade = "Third Class";
+    } else {
+        $grade = "Fail";
+    }
+
+    echo "<h3>Marks: $marks% - Grade: $grade</h3>";
+}
+?>
+
+<form method="post">
+    Enter Marks (%): 
+    <input type="number" name="marks" min="0" max="100" required>
+    <input type="submit" value="Check Grade">
+</form>
+
+
+14.Show a form with input fields for a user's name, email, and message. When the form is
+submitted, display a confirmation message on the same page with the user's name and
+email.
+
+
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $message = trim($_POST['message']);
+
+    if (!empty($name) && !empty($email) && !empty($message)) {
+        echo "<h3>Form Submitted Successfully!</h3>";
+        echo "Thank you, <b>$name</b>. We have received your message.<br>";
+        echo "A confirmation has been sent to: <b>$email</b><br><br>";
+        echo "<a href=''>Go Back</a>";
+    } else {
+        echo "<p style='color:red;'>Please fill in all fields.</p>";
+        showForm();
+    }
+} else {
+    showForm();
+}
+
+// Function to display the form
+function showForm() {
+    echo '
+    <form method="post">
+        <h3>Contact Form</h3>
+        Name: <input type="text" name="name"><br><br>
+        Email: <input type="email" name="email"><br><br>
+        Message: <textarea name="message"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    ';
+}
+?>
+
+
+15. Create a PHP program to compute the sum of the digits of a number.
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $number = $_POST['number'];
+    $sum = 0;
+
+    // Calculate sum of digits
+    $temp = $number;
+    while ($temp > 0) {
+        $digit = $temp % 10; 
+        $sum += $digit;
+        $temp = (int)($temp / 10);
+    }
+
+    echo "The sum of digits of $number is: $sum";
+}
+?>
+
+<form method="post">
+    Enter a number: <input type="number" name="number" required>
+    <input type="submit" value="Calculate Sum">
+</form>
+
+16.Write a PHP function that takes two numbers as input and returns the sum of those
+numbers. Display the result on the webpage, when a button is clicked.
+<?php
+function addNumbers($num1, $num2) {
+    return $num1 + $num2;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $number1 = $_POST['number1'];
+    $number2 = $_POST['number2'];
+    $sum = addNumbers($number1, $number2);
+    echo "<h3>The sum of $number1 and $number2 is: $sum</h3>";
+}
+?>
+
+<form method="post">
+    Enter first number: <input type="number" name="number1" required><br><br>
+    Enter second number: <input type="number" name="number2" required><br><br>
+    <input type="submit" value="Calculate Sum">
+</form>
+
+17.Examine the various control structures in php and construct a bank transaction problem
+with customers deposit and withdrawal of amount.
+
+<?php
+$balance = 1000; // Initial account balance
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = $_POST['action'];
+    $amount = $_POST['amount'];
+
+    if ($amount <= 0) {
+        echo "<p style='color:red;'>Amount must be greater than 0.</p>";
+    } else {
+        switch ($action) {
+            case "deposit":
+                $balance += $amount;
+                echo "<p style='color:green;'>Deposited Rs. $amount successfully.</p>";
+                echo "<p>Current Balance: Rs. $balance</p>";
+                break;
+
+            case "withdraw":
+                if ($amount > $balance) {
+                    echo "<p style='color:red;'>Insufficient balance! Withdrawal failed.</p>";
+                } else {
+                    $balance -= $amount;
+                    echo "<p style='color:blue;'>Withdrawn Rs. $amount successfully.</p>";
+                    echo "<p>Current Balance: Rs. $balance</p>";
+                }
+                break;
+
+            default:
+                echo "<p style='color:red;'>Invalid transaction type.</p>";
+        }
+    }
+}
+?>
+
+<h2>Bank Transaction</h2>
+<form method="post">
+    Enter Amount: <input type="number" name="amount" required><br><br>
+    Choose Transaction:
+    <select name="action">
+        <option value="deposit">Deposit</option>
+        <option value="withdraw">Withdraw</option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+
+18.IsSet() function in PHP with example.
+The isset() function checks if a variable is set and not null.
+<?php
+$name = "Madhunisha";
+
+if (isset($name)) {
+    echo "The variable 'name' is set.";
+} else {
+    echo "The variable 'name' is not set.";
+}
+?>
+Output:
+The variable 'name' is set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
