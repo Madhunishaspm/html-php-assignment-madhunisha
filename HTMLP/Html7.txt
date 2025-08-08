@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greeting Form</title>
+    <script>
+        function showGreeting(event) {
+            event.preventDefault(); // prevent form from submitting and refreshing page
+
+            const name = document.getElementById("username").value.trim();
+            const result = document.getElementById("result");
+
+            if (name === "") {
+                result.innerHTML = "<span style='color: red;'>Error: Name field cannot be empty!</span>";
+            } else {
+                result.innerHTML = `
+                    <p>Hello, Welcome to Everyone!</p>
+                    <p>Have a nice day!!</p>
+                `;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h2>Greeting Form</h2>
+
+<form onsubmit="showGreeting(event)">
+    Enter your name:
+    <input type="text" id="username" name="username">
+    <input type="submit" value="Submit">
+</form>
+
+<div id="result"></div>
+
+</body>
+</html>
