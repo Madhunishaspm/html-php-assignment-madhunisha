@@ -406,6 +406,217 @@ if (isset($name)) {
 Output:
 The variable 'name' is set.
 
+19.Examine a PHP function that accepts an array of numbers and returns the highest and
+lowest values in that array. Display the results on the webpage.
+<?php
+function findHighLow($numbers) {
+    $highest = max($numbers);
+    $lowest = min($numbers);
+    return array("highest" => $highest, "lowest" => $lowest);
+}
+
+$numbers = array(25, 78, 12, 98, 44, 63);
+$result = findHighLow($numbers);
+
+echo "Highest Value: " . $result["highest"] . "<br>";
+echo "Lowest Value: " . $result["lowest"];
+?>
+OUTPUT:
+Highest Value: 98  
+Lowest Value: 12
+
+20.Implement a contact form with validation to ensure all fields are filled out before
+submission.
+
+<?php
+$name = $email = $message = "";
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["message"])) {
+        $error = "All fields are required!";
+    } else {
+        $name = htmlspecialchars($_POST["name"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $message = htmlspecialchars($_POST["message"]);
+        echo "Thank you, $name. We received your message.";
+    }
+}
+?>
+
+<form method="post" action="">
+    Name: <input type="text" name="name" value="<?= $name ?>"><br><br>
+    Email: <input type="email" name="email" value="<?= $email ?>"><br><br>
+    Message:<br>
+    <textarea name="message"><?= $message ?></textarea><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<?php
+if (!empty($error)) {
+    echo "<p style='color:red;'>$error</p>";
+}
+?>
+
+
+21.Construct a PHP function that checks if a given year is a leap year and returns true or
+false accordingly.
+<?php
+function isLeapYear($year) {
+    return ($year % 4 == 0 && $year % 100 != 0) || ($year % 400 == 0);
+}
+
+$year = 2024;
+
+if (isLeapYear($year)) {
+    echo "$year is a leap year.";
+} else {
+    echo "$year is not a leap year.";
+}
+?>
+
+OUTPUT:
+2024 is a leap year.
+
+
+22. Create a PHP script that counts the number of occurrences of a specific word in a given
+string.
+<?php
+$text = "The quick brown fox jumps over the lazy dog. The dog was not amused.";
+$word = "the";
+
+$count = substr_count(strtolower($text), strtolower($word));
+echo "The word '$word' appears $count times.";
+?>
+OUTPUT:
+The word 'the' appears 3 times.
+
+
+23.Prioritize the use of GET and POST arguments in PHP with a real time example.
+<html>
+<head>
+    <title>GET and POST Example</title>
+</head>
+<body>
+
+<h2> Search Form (GET Method)</h2>
+<form method="get" action="">
+    Search: <input type="text" name="query">
+    <input type="submit" name="searchBtn" value="Search">
+</form>
+
+<?php
+// GET method handling
+if (isset($_GET['searchBtn']) && !empty($_GET['query'])) {
+    $search = htmlspecialchars($_GET['query']);
+    echo "<p>You searched for: <strong>$search</strong></p>";
+}
+?>
+
+<hr>
+
+<h2> Login Form (POST Method)</h2>
+<form method="post" action="">
+    Username: <input type="text" name="username"><br><br>
+    Password: <input type="password" name="password"><br><br>
+    <input type="submit" name="loginBtn" value="Login">
+</form>
+
+<?php
+// POST method handling
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+
+    // Example credentials
+    if ($username == "admin" && $password == "1234") {
+        echo "<p style='color:green;'>Welcome, <strong>$username</strong>!</p>";
+    } else {
+        echo "<p style='color:red;'>Invalid credentials.</p>";
+    }
+}
+?>
+
+</body>
+</html>
+
+
+24. Write a PHP script to manipulate the strings with all the string functions.
+<?php
+$str = " Hello PHP World! ";
+
+// String manipulation
+echo "Original: '$str'<br>";
+echo "Trimmed: '" . trim($str) . "'<br>";
+echo "Lowercase: " . strtolower($str) . "<br>";
+echo "Uppercase: " . strtoupper($str) . "<br>";
+echo "Length: " . strlen($str) . "<br>";
+echo "Word count: " . str_word_count($str) . "<br>";
+echo "Reversed: " . strrev($str) . "<br>";
+echo "Position of 'PHP': " . strpos($str, "PHP") . "<br>";
+echo "Replace 'World' with 'Universe': " . str_replace("World", "Universe", $str) . "<br>";
+?>
+
+25. Construct a PHP script to replace the first ‘the’ of the following string with ‘best’. Data:
+“The Thing will come to you soon”
+<?php
+$sentence = "The Thing will come to you soon";
+$modified = preg_replace('/the/i', 'best', $sentence, 1); // Case-insensitive replacement
+echo $modified;
+?>
+
+27. Articulate the mathematical operators with suitable examples in PHP.
+<?php
+$a = 10;
+$b = 3;
+
+echo "Addition: " . ($a + $b) . "<br>";     // 13  
+echo "Subtraction: " . ($a - $b) . "<br>";  // 7  
+echo "Multiplication: " . ($a * $b) . "<br>"; // 30  
+echo "Division: " . ($a / $b) . "<br>";     // 3.333...  
+echo "Modulus: " . ($a % $b) . "<br>";      // 1  
+echo "Exponent: " . ($a ** $b) . "<br>";    // 1000  
+?>
+28. Consider three variables $a, $b, $c, apply var_dump() function to evaluate if the values
+are equal or not.
+<?php
+$a = 10;
+$b = "10";
+$c = 10;
+
+var_dump($a == $b);  // true (value equal)
+var_dump($a === $b); // false (type not equal)
+var_dump($a === $c); // true (value and type equal)
+?>
+
+
+29. Infer the usage of the following PHP functions:
+(i) rand() (ii) abs() (iii) strreplace() (iv) pi( ) (v) ceil()
+
+<?php
+echo "Random number (1-100): " . rand(1, 100) . "<br>";  // rand()
+echo "Absolute value of -50: " . abs(-50) . "<br>";      // abs()
+echo "Replace 'world' with 'PHP': " . str_replace("world", "PHP", "Hello world") . "<br>"; // str_replace()
+echo "Value of pi: " . pi() . "<br>";                    // pi()
+echo "Ceil of 4.3: " . ceil(4.3) . "<br>";               // ceil()
+?>
+
+30. Develop a PHP script that generates a random password consisting of a combination of
+letters, numbers, and special characters.
+
+
+<?php
+function generatePassword($length = 12) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    $password = '';
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $chars[rand(0, strlen($chars) - 1)];
+    }
+    return $password;
+}
+
+echo "Random Password: " . generatePassword(12);
+?>
 
 
 
