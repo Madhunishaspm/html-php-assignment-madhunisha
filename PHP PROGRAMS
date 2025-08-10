@@ -564,7 +564,23 @@ $sentence = "The Thing will come to you soon";
 $modified = preg_replace('/the/i', 'best', $sentence, 1); // Case-insensitive replacement
 echo $modified;
 ?>
-
+26.Construct a PHP Program to create a chess board in PHP using the 'for' loop
+<?php
+echo "<table border='1' cellspacing='0' cellpadding='20'>";
+for ($row = 1; $row <= 8; $row++) {
+    echo "<tr>";
+    for ($col = 1; $col <= 8; $col++) {
+        $total = $row + $col;
+        if ($total % 2 == 0) {
+            echo "<td style='background-color: white; width: 40px; height: 40px;'></td>";
+        } else {
+            echo "<td style='background-color: black; width: 40px; height: 40px;'></td>";
+        }
+    }
+    echo "</tr>";
+}
+echo "</table>";K    
+?>
 27. Articulate the mathematical operators with suitable examples in PHP.
 <?php
 $a = 10;
