@@ -133,5 +133,104 @@ Line appended successfully.
 File Content:
 This is a new line.
 Another line added.
+76. Write a simple 'birthday countdown' script, the script will count the number of days between current day and birthday.
+<?php
+// Q76: Birthday Countdown Script
+$today = date("Y-m-d");
+$birthday = "2025-12-25"; // Example birthday
+$diff = strtotime($birthday) - strtotime($today);
+$days = floor($diff / (60*60*24));
+echo "Today: $today <br>";
+echo "Birthday: $birthday <br>";
+echo "Days left for birthday: $days days";
+?>
+OUTPUT:
+Today: 2025-08-16
+Birthday: 2025-12-25
+Days left for birthday: 131 days
+77. Classify the various network functions which provide network information or functions.
+<?php
+// Q77: Demonstrating some network functions]
+echo "IP Address of localhost: " . gethostbyname("localhost") . "<br>";
+echo "Host name of 8.8.8.8: " . gethostbyaddr("8.8.8.8") . "<br>";
+echo "Check if www.google.com is reachable: " . gethostbyname("www.google.com") . "<br>";
+$server_ip = gethostbyname("example.com");
+echo "IP of example.com: $server_ip<br>";
+if (checkdnsrr("example.com", "MX")) {
+    echo "example.com has a mail server.<br>";
+} else {
+    echo "example.com has no mail server.<br>";
+}
+?>
+OUTPUT:
+IP Address of localhost: 127.0.0.1
+Host name of 8.8.8.8: dns.google
+Check if www.google.com is reachable: 142.251.223.228
+IP of example.com: 23.192.228.80
+example.com has a mail server.
+78. Elucidate the steps to read and delete existing cookies in the browser.
+<?php
+// Q78: Working with cookies
+
+// Step 1: Set a cookie
+setcookie("user", "Alice", time()+3600); // expires in 1 hour
+
+// Step 2: Read a cookie
+if(isset($_COOKIE['user'])) {
+    echo "Cookie value: " . $_COOKIE['user'] . "<br>";
+} else {
+    echo "Cookie not set yet.<br>";
+}
+
+// Step 3: Delete a cookie
+setcookie("user", "", time()-3600); // expired
+echo "Cookie deleted.";
+?>
+OUTPUT:
+Cookie not set yet.
+Cookie deleted.
+79. Create a PHP program to append two files in another file.
+<?php
+// Q79: Append contents of two files into a new file
+
+$file1 = "file1.txt";
+$file2 = "file2.txt";
+$outputFile = "merged.txt";
+
+// Create demo files
+file_put_contents($file1, "This is content of file 1.\n");
+file_put_contents($file2, "This is content of file 2.\n");
+
+// Merge
+$content = file_get_contents($file1) . file_get_contents($file2);
+file_put_contents($outputFile, $content);
+
+echo "Files merged successfully.<br>";
+echo "<b>Merged File Content:</b><br>";
+echo nl2br(file_get_contents($outputFile));
+?>
+OUTPUT:
+Files merged successfully.
+Merged File Content:
+This is content of file 1.
+This is content of file 2.
+80. Build a test cookie with the setcookie( ) function using PHP. Give me big code and understanding the concept ,with the output.
+<?php
+// Q80: Setting and reading a test cookie
+setcookie("TestCookie", "HelloCookie", time()+3600); // 1 hour expiry\
+if(isset($_COOKIE['TestCookie'])) {
+    echo "Cookie value: " . $_COOKIE['TestCookie'];
+} else {
+    echo "Cookie not set yet. Refresh the page.";
+}
+?>
+OUTPUT:
+Output (first load):
+Cookie not set yet. Refresh the page.
+Output (after refresh):
+Cookie value: HelloCookie
+
+
+
 
 
