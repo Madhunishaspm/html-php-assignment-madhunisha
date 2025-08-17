@@ -1,1 +1,418 @@
+31. Remove the first element from an array in PHP using array functions.
+ANSWER: In PHP, we can remove the first element of an array using the array_shift() function.
+<?php
+$animals = array("Dog", "Cat", "Elephant", "Tiger");
+$removed = array_shift($animals);
+echo "Removed: " . $removed . "\n";
+echo "Updated Array Elements: ";
+foreach ($animals as $animal) {
+    echo $animal . " ";
+}
+?>
+OUTPUT
+Removed: Dog
+Updated Array Elements: Cat Elephant Tiger 
+32. Infer the result of the following PHP code?
+a.<?php
+$mail = "admin@example.com";
+$mail = str_replace("a","@",$mail);
+echo "Contact me at $mail.";
+?>
+OUTPUT:  .Contact me at @dmin@ex@mple.com.
+b. Determine the result of the following PHP code?
+<?php
+$names = array("alex", "jean", "emily", "jane");
+$name = preg_grep("/^e/", $names);
+print_r($name);
+?>
+OUTPUT: Array
+(
+    [2] => emily
+ )
+33. Construct a PHP code to create a multidimensional array representing a matrix and display the value in the second row and third column.
+<!DOCTYPE html>
+<html>
+<head>
+<title>Matrix Display in PHP</title>
+</head>
+<body>
+<h2>Matrix Example</h2>
+<?php
+$matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+];
+echo "<table border='1' cellpadding='10'>";
+for ($i = 0; $i < count($matrix); $i++) {
+    echo "<tr>";
+    for ($j = 0; $j < count($matrix[$i]); $j++) {
+        echo "<td>" . $matrix[$i][$j] . "</td>";
+    }
+    echo "</tr>";
+}
+echo "</table>";
+$value = $matrix[1][2];
+echo "<p><strong>Value in 2nd Row, 3rd Column: </strong>" . $value . "</p>";
+?>
+</body>
+</html>
+Output:
++----+----+----+
+| 10 | 20 | 30 |
+| 40 | 50 | 60 |
+| 70 | 80 | 90 |
++----+----+----+
+Value in 2nd Row, 3rd Column: 60
+34. Replace all occurrences of a specific word with another word in a string using regular expressions in PHP.
+ANSWER: <?php
+echo "Q34: Replace Word using Regular Expression\n";
+// Original string
+$text = "PHP is very powerful. Learning PHP is fun. PHP developers are in demand.";
+// Word to replace
+$searchWord = "/PHP/i";   // 'i' flag means case-insensitive
+$replaceWord = "Python";
+// Perform replacement
+$updatedText = preg_replace($searchWord, $replaceWord, $text);
+// Display results
+echo "Original Text:\n" . $text . "\n\n";
+echo "After Replacement:\n" . $updatedText . "\n";
+?>
+OUTPUT:
+Q34: Replace Word using Regular Expression
+Original Text:
+PHP is very powerful. Learning PHP is fun. PHP developers are in demand.
+After Replacement:
+Python is very powerful. Learning Python is fun. Python developers are in demand.
+35. Write a PHP script using an array that checks if a string contains another string and displays the result.
+ANSWER :<?php
+echo "Q35: String Contains Another String\n\n";
+$sentences = array(
+    "The sky is blue",
+    "PHP is a scripting language",
+    "I love programming",
+    "Array functions are useful"
+);
+$search = "PHP";
+foreach ($sentences as $index => $line) {
+    if (strpos($line, $search) !== false) {
+        echo "Sentence " . ($index+1) . " contains the word [$search]: " . $line . "\n";
+    } else {
+        echo "Sentence " . ($index+1) . " does NOT contain [$search]: " . $line . "\n";
+    }
+}
+?>
+OUTPUT: Q35: String Contains Another String
+Sentence 1 does NOT contain [PHP]: The sky is blue
+Sentence 2 contains the word [PHP]: PHP is a scripting language
+Sentence 3 does NOT contain [PHP]: I love programming
+Sentence 4 does NOT contain [PHP]: Array functions are useful
+36. Create an array of fruits in PHP and display the third element.
+<?php
+echo "==============================\n";
+echo " Q36: Fruits Array Demonstration\n";
+echo "==============================\n\n";
+// Step 1: Create an array of fruits
+$fruits = array("Apple", "Banana", "Mango", "Orange", "Grapes", "Pineapple", "Papaya");
+// Step 2: Display all fruits with indexes
+echo "List of Fruits with Indexes:\n";
+foreach($fruits as $index => $fruit) {
+echo "Index $index => $fruit\n";
+}
+echo "\n";
+$total = count($fruits);
+echo "Total number of fruits in the array: $total\n\n";
+echo "The third element in the array is: " . $fruits[2] . "\n\n";
+// Step 5: Add a new fruit to the array
+array_push($fruits, "Kiwi");
+echo "After adding a new fruit (Kiwi), updated array is:\n";
+foreach($fruits as $index => $fruit) {
+    echo "Index $index => $fruit\n";
+}
+echo "\n";
+$removeIndex = array_search("Banana", $fruits);
+if ($removeIndex !== false) {
+    unset($fruits[$removeIndex]);
+}
+echo "After removing 'Banana', updated array is:\n";
+foreach($fruits as $index => $fruit) {
+    echo "Index $index => $fruit\n";
+}
+echo "\n";
+echo "First fruit in the array: " . reset($fruits) . "\n";
+echo "Last fruit in the array: " . end($fruits) . "\n";
+echo "\n=== End of Program ===\n";
+?>
+OUTPUT:  
+==============================
+ Q36: Fruits Array Demonstration
+==============================
+List of Fruits with Indexes:
+Index 0 => Apple
+Index 1 => Banana
+Index 2 => Mango
+Index 3 => Orange
+Index 4 => Grapes
+Index 5 => Pineapple
+Index 6 => Papaya
+Total number of fruits in the array: 7
+The third element in the array is: Mango
+After adding a new fruit (Kiwi), updated array is:
+Index 0 => Apple
+Index 1 => Banana
+Index 2 => Mango
+Index 3 => Orange
+Index 4 => Grapes
+Index 5 => Pineapple
+Index 6 => Papaya
+Index 7 => Kiwi
+After removing 'Banana', updated array is:
+Index 0 => Apple
+Index 2 => Mango
+Index 3 => Orange
+Index 4 => Grapes
+Index 5 => Pineapple
+Index 6 => Papaya
+Index 7 => Kiwi
+First fruit in the array: Apple
+Last fruit in the array: Kiwi
+
+37. Explain Push and Pop in array functions.
+<?php
+// Q37 - Push and Pop Example in Arrays
+echo "Q37: Push and Pop in Arrays\n\n";
+// Step 1: Create a stack (array)
+$stack = array("Red", "Green", "Blue");
+// Step 2: Show original stack
+echo "Original Stack:\n";
+print_r($stack);
+echo "\n";
+// Step 3: Push new elements into stack
+array_push($stack, "Yellow", "Purple");
+echo "After Push (Yellow, Purple):\n";
+print_r($stack);
+echo "\n";
+// Step 4: Pop element from stack
+$popped = array_pop($stack);
+echo "After Pop Operation:\n";
+print_r($stack);
+echo "Popped Element: " . $popped . "\n\n";
+// Step 5: Push more elements
+array_push($stack, "Black", "White");
+echo "After another Push (Black, White):\n";
+print_r($stack);
+echo "\n";
+// Step 6: Pop two elements
+$firstPop = array_pop($stack);
+$secondPop = array_pop($stack);
+echo "After popping twice:\n";
+print_r($stack);
+echo "Popped Elements: $firstPop, $secondPop\n";
+?>
+OUTPUT:
+Q37: Push and Pop in Arrays
+Original Stack:
+Array
+(
+    [0] => Red
+    [1] => Green
+    [2] => Blue
+)
+After Push (Yellow, Purple):
+Array
+(
+    [0] => Red
+    [1] => Green
+    [2] => Blue
+    [3] => Yellow
+    [4] => Purple
+)
+After Pop Operation:
+Array
+(
+    [0] => Red
+    [1] => Green
+    [2] => Blue
+    [3] => Yellow
+)
+Popped Element: Purple
+After another Push (Black, White):
+Array
+(
+    [0] => Red
+    [1] => Green
+    [2] => Blue
+    [3] => Yellow
+    [4] => Black
+    [5] => White
+)
+After popping twice:
+Array
+(
+    [0] => Red
+    [1] => Green
+    [2] => Blue
+    [3] => Yellow
+)
+Popped Elements: White, Black
+38. Interpret the steps to iterate over a PHP array using a while loop with an example.
+<?php
+// Q38 - Iterating an array with while loop
+echo "<h2>Q38: Iterating Array with While Loop</h2>";
+// Define array
+$numbers = array(10, 20, 30, 40, 50);
+// Reset pointer to first element
+reset($numbers);
+// Loop until no more elements
+while (($value = current($numbers)) !== false) {
+    echo "Current Value: " . $value . "\n";
+    next($numbers); // move pointer to next element
+}
+?>
+OUTPUT: <h2>Q38: Iterating Array with While Loop</h2>Current Value: 10
+Current Value: 20
+Current Value: 30
+Current Value: 40
+Current Value: 50
+39. A school wants to automate the calculation of student grades. Design a system that allows teachers to input student scores, calculates their grades, and generates a summary report. How would you utilize arrays and array functions to store and process the student data effectively?
+<?php
+function letter_grade(int|float $score): string {
+    if ($score >= 90) return "A";
+    if ($score >= 80) return "B";
+    if ($score >= 70) return "C";
+    if ($score >= 60) return "D";
+    return "F";
+}
+$input = $_POST['raw'] ?? "Alice, 95\nBob, 82\nCharlie, 67\nDaisy, 74\nEvan, 58";
+$students = [];
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $lines = preg_split("/\r\n|\n|\r/", trim($input));
+    foreach ($lines as $ln) {
+        if (trim($ln) === '') continue;
+        $parts = array_map('trim', explode(',', $ln));
+        if (count($parts) !== 2 || $parts[0] === '' || !is_numeric($parts[1])) {
+            $errors[] = "Invalid line: \"$ln\". Use format: Name,Score";
+            continue;
+        }
+            $students[] = [
+            'name'  => $parts[0],
+            'score' => (float)$parts[1],
+            'grade' => letter_grade((float)$parts[1])
+        ];
+    }
+// Sort by score descending
+         if ($students) {
+        $scores = array_column($students, 'score');
+        array_multisort($scores, SORT_DESC, $students);
+    }
+}
+$total = array_reduce($students, fn($c, $s) => $c + $s['score'], 0);
+$avg   = $students ? round($total / count($students), 2) : 0;
+$max   = $students ? max(array_column($students, 'score')) : null;
+$min   = $students ? min(array_column($students, 'score')) : null;
+$dist  = ['A'=>0,'B'=>0,'C'=>0,'D'=>0,'F'=>0];
+foreach ($students as $s) $dist[$s['grade']]++;
+?>
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Q39 Student Grades System</title></head>
+<body>
+<h2>Student Grades System</h2>
+<form method="post">
+    <p>Enter students (one per line) as <b>Name,Score</b>:</p>
+    <textarea name="raw" rows="8" cols="60"><?=htmlspecialchars($input)?></textarea><br><br>
+    <button type="submit">Calculate Grades</button>
+</form>
+<?php if ($errors): ?>
+    <h3>Input Errors</h3>
+    <ul><?php foreach ($errors as $e) echo "<li>".htmlspecialchars($e)."</li>"; ?></ul>
+<?php endif; ?>
+<?php if ($students): ?>
+    <h3>Per-Student Results</h3>
+    <table border="1" cellpadding="6">
+        <tr><th>#</th><th>Name</th><th>Score</th><th>Grade</th></tr>
+        <?php foreach ($students as $i=>$s): ?>
+            <tr>
+                <td><?= $i+1 ?></td>
+                <td><?= htmlspecialchars($s['name']) ?></td>
+                <td><?= $s['score'] ?></td>
+                <td><?= $s['grade'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+   <h3>Summary</h3>
+    <p><b>Total Students:</b> <?= count($students) ?></p>
+    <p><b>Average:</b> <?= $avg ?></p>
+    <p><b>Highest:</b> <?= $max ?></p>
+    <p><b>Lowest:</b> <?= $min ?></p>
+    <p><b>Grade Distribution:</b>
+        A(<?=$dist['A']?>) B(<?=$dist['B']?>) C(<?=$dist['C']?>) D(<?=$dist['D']?>) F(<?=$dist['F']?>)
+    </p>
+<?php endif; ?>
+</body>
+</html>
+OUTPUT:
+Student Grades System
+Enter students (one per line) as Name,Score:
+Calculate Grades
+Per-Student Results
+#	Name	Score	Grade
+1	Alice	95	A
+2	Bob	82	B
+3	Daisy	74	C
+4	Charlie	67	D
+5	Evan	58	F
+Summary
+Total Students: 5
+Average: 75.2
+Highest: 95
+Lowest: 58
+Grade Distribution: A(1) B(1) C(1) D(1) F(1)
+40. Write a PHP script to remove all characters from a string except a-z A-Z 0-9 or " " using an array.
+<?php
+$input = $_POST['text'] ?? 'Hello@# 123 World!! $$ ^_^';
+$clean = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $chars = preg_split('//u', $input, -1, PREG_SPLIT_NO_EMPTY); // array of characters
+    $filtered = array_filter($chars, function($ch) {
+        // Keep alphanumeric or space only
+        return ctype_alnum($ch) || $ch === ' ';
+    });
+    $clean = implode('', $filtered);
+}
+?>
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Q40 Character Filter</title></head>
+<body>
+<h2>Q40: Keep only a–z A–Z 0–9 and spaces (Array-based)</h2>
+<form method="post">
+    <input type="text" name="text" size="60" value="<?=htmlspecialchars($input)?>">
+    <button type="submit">Clean</button>
+</form>
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+    <p><b>Original:</b> <?=htmlspecialchars($input)?></p>
+    <p><b>Cleaned:</b> <?=htmlspecialchars($clean)?></p>
+<?php endif; ?>
+</body>
+</html>
+OUTPUT:
+Q40: Keep only a–z A–Z 0–9 and spaces (Array-based)
+Original: Hello@# 123 World!! $$ ^_^
+Cleaned: Hello 123 World
+41. How can you use regular expressions to extract all email addresses from a given string using an array in PHP?
+42. Write a PHP script to find the maximum and minimum marks from the following set of arrays
+$marks1 = array(360,310,310,330,313,375,456,111,256);
+$marks2 = array(350,340,356,330,321);
+$marks3 = array(630,340,570,635,434,255,298);
+
+43. Develop a regular expression pattern that validates a password based on the following criteria: at least 8
+characters long, contains at least one uppercase letter, one lowercase letter, one digit, and one special
+character.
+44. Develop a music playlist management system for a streaming service. The system should allow users to
+create, modify, and organize playlists. How would you use arrays and array functions to store and
+manipulate the song data and playlist information efficiently?
+45. Write a PHP function to compare two multidimensional arrays and return the difference.
+46. Write a PHP program to find the index of a specific value in an array.
 
