@@ -1,1 +1,114 @@
+71. Tell the different file handling modes available in PHP?
+ANSWER:
+<?php
+// Q71: Demonstrating different file handling modes in PHP
+$filename = "demo.txt";
+// Creating a file with write mode
+$file = fopen($filename, "w"); // "w" - write mode
+fwrite($file, "Hello, this is a test file.\n");
+fclose($file);
+// Opening file in append mode
+$file = fopen($filename, "a"); // "a" - append mode
+fwrite($file, "Appending a new line.\n");
+fclose($file);
+// Opening file in read mode
+$file = fopen($filename, "r"); // "r" - read mode
+echo "Reading file contents:<br>";
+while(!feof($file)) {
+    echo fgets($file). "<br>";
+}
+fclose($file);
+// Displaying file handling modes
+echo "<br><b>Common File Modes in PHP:</b><br>";
+echo "r  - Read only<br>";
+echo "w  - Write only (truncates file)<br>";
+echo "a  - Append only<br>";
+echo "r+ - Read/Write<br>";
+echo "w+ - Read/Write (truncates file)<br>";
+echo "a+ - Read/Write (append)<br>";
+?>
+OUTPUT:
+Reading file contents:
+Hello, this is a test file.
+Appending a new line.
+Common File Modes in PHP:
+r  - Read only
+w  - Write only (truncates file)
+a  - Append only
+r+ - Read/Write
+w+ - Read/Write (truncates file)
+a+ - Read/Write (append)
+72. Write the PHP program to implement the following session functions.
+(i)session_register() (ii) session_unset() (iii) session_destroy()
+ANSWER:
+<?php
+// Q72: Demonstrating session functions
+session_start();
+// Registering session variables
+$_SESSION['username'] = "JohnDoe";
+$_SESSION['role'] = "Admin";
+echo "Session variables are set.<br>";
+echo "Username: " . $_SESSION['username'] . "<br>";
+echo "Role: " . $_SESSION['role'] . "<br>";
+// Unset a session variable
+session_unset(); // removes all session variables
+echo "All session variables are removed.<br>";
+// Destroying the session completely
+session_destroy();
+echo "Session destroyed.<br>";
+?>
+OUTPUT:Session variables are set.
+Username: JohnDoe
+Role: Admin
+All session variables are removed.
+Session destroyed.
+73. Develop a PHP program to display an error message when a file other than jpg or png is uploaded
+<?php
+// Q73: File upload validation
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $file_type = strtolower(pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION));
+    
+    if ($file_type != "jpg" && $file_type != "png") {
+        echo "Error: Only JPG and PNG files are allowed.";
+    } else {
+        echo "File uploaded successfully!";
+    }
+}
+?>
+<!-- HTML Upload Form -->
+<form method="POST" enctype="multipart/form-data">
+  Select file to upload:
+  <input type="file" name="file" required>
+  <input type="submit" value="Upload">
+</form>
+OUTPUT:
+Output (case 1 - wrong file type):
+Error: Only JPG and PNG files are allowed.
+Output (case 2 - correct file type):
+File uploaded successfully!
+74. Outline the file reading and writing functions of PHP with suitable examples.
+<?php
+$file = "sample.txt";
+// Writing to a file
+file_put_contents($file, "This is the first line.\n", FILE_APPEND);
+file_put_contents($file, "This is the second line.\n", FILE_APPEND);
+// Reading file content
+echo "<b>Reading file with file_get_contents:</b><br>";
+echo nl2br(file_get_contents($file));
+// Using fopen, fread, fwrite
+$fp = fopen($file, "a+"); 
+fwrite($fp, "Appending another line using fwrite.\n");
+rewind($fp); // move pointer to beginning
+echo "<br><b>Reading using fread:</b><br>";
+echo nl2br(fread($fp, filesize($file)));
+fclose($fp);
+?>
+OUTPUT:
+Reading file with file_get_contents:
+This is the first line.
+This is the second line.
+Reading using fread:
+This is the first line.
+This is the second line.
+Appending another line using fwrite.
 
