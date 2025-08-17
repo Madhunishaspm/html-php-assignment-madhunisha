@@ -111,4 +111,27 @@ Reading using fread:
 This is the first line.
 This is the second line.
 Appending another line using fwrite.
+75. Build a PHP function that takes the filename and a new line of content as input. Append the new line of content as a new line at the end of the file.
+<?php
+function appendLineToFile($filename, $newLine) {
+    $file = fopen($filename, "a"); // open in append mode
+    fwrite($file, $newLine . "\n");
+    fclose($file);
+    echo "Line appended successfully.<br>";
+}
+// Usage
+$file = "notes.txt";
+appendLineToFile($file, "This is a new line.");
+appendLineToFile($file, "Another line added.");
+// Displaying file content
+echo "<b>File Content:</b><br>";
+echo nl2br(file_get_contents($file));
+?>
+Output:
+Line appended successfully.
+Line appended successfully.
+File Content:
+This is a new line.
+Another line added.
+
 
