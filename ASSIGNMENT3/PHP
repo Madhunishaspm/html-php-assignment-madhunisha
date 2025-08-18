@@ -506,6 +506,248 @@ foreach ($_SESSION['cart'] as $item) {
 OUTPUT:
 Shopping Cart:
 - Apple
+96. How to register a variable in a PHP session? Give an example.
+<?php
+// Q.96: Registering a variable in a PHP session
+session_start(); // Start session
+// Registering session variable
+$_SESSION['username'] = "Madhunisha";
+$_SESSION['role'] = "Admin";
+echo "<h2>Q.96: Register Session Variable</h2>";
+echo "Username stored in session: " . $_SESSION['username'] . "<br>";
+echo "Role stored in session: " . $_SESSION['role'] . "<br>";
+?>
+Output:
+Q.96: Register Session Variable
+Username stored in session: Madhunisha
+Role stored in session: Admin
+97. Discover the various session functions of PHP. Explain its behavior.
+ANSWER:
+<?php
+// Q.97: Session functions demonstration
+
+session_start(); 
+$_SESSION['test'] = "Hello Session";
+
+echo "<h2>Q.97: PHP Session Functions</h2>";
+
+// session_id()
+echo "Session ID: " . session_id() . "<br>";
+
+// session_name()
+echo "Session Name: " . session_name() . "<br>";
+
+// session_status()
+$status = session_status();
+if ($status == PHP_SESSION_DISABLED) echo "Sessions are disabled<br>";
+elseif ($status == PHP_SESSION_NONE) echo "Sessions are enabled, but none exists<br>";
+elseif ($status == PHP_SESSION_ACTIVE) echo "Sessions are enabled, and one exists<br>";
+
+// session_unset()
+session_unset(); // removes all variables
+echo "After session_unset(), variable 'test' is: " . ($_SESSION['test'] ?? "Not found") . "<br>";
+
+// session_destroy()
+session_destroy();
+echo "Session destroyed.";
+?>
+OUTPUT:
+Q.97: PHP Session Functions
+Session ID: cbiq7np9sroiknhatr4ntthlaf
+Session Name: PHPSESSID
+Sessions are enabled, and one exists
+After session_unset(), variable 'test' is: Not found
+Session destroyed.
+98. Model an Admin Login, Logout form using session variables in PHP. 
+<?php
+session_start();
+
+$admin_username = "admin";
+$admin_password = "12345";
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: q98.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_POST['username'] === $admin_username && $_POST['password'] === $admin_password) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $_POST['username'];
+        header("Location: q98.php");
+        exit();
+    } else {
+        $error = "Invalid Username or Password!";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head><title>Q.98 Admin Login</title></head>
+<body>
+<?php if (!isset($_SESSION['loggedin'])): ?>
+    <h2>Admin Login</h2>
+    <?php if(isset($error)) echo "<p style='color:red'>$error</p>"; ?>
+    <form method="post">
+        Username: <input type="text" name="username"><br>
+        Password: <input type="password" name="password"><br>
+        <input type="submit" value="Login">
+    </form>
+<?php else: ?>
+    <h2>Welcome, <?php echo $_SESSION['username']; ?></h2>
+    <a href="?logout=true">Logout</a>
+<?php endif; ?>
+</body>
+</html>
+99. Build a PHP program to apply the following tasks using session.
+(a) Initiate a session (or pick up an existing one).
+(b) Check for the existence of a pre-existing entry in $_SESSION. If not present, assume 
+that the session is new.
+(c) Increment a counter that tracks how many times that the user has visited this page.
+(d) Store the incremented counter back in $_SESSION.
+(e) Provide a link back to the page itself, embedding the session ID as an argument if it is 
+found.
+(f) Using PHP, construct a program to restrict the user from uploading the same file again 
+and again. If the same file already exists in that folder, display an appropriate error 
+message.
+<?php
+// Q.99: Session tracking and file upload restriction
+
+session_start();
+
+// (a) Start session
+echo "<h2>Q.99 Session Handling</h2>";
+
+// (b) Check if counter exists
+if (!isset($_SESSION['counter'])) {
+    $_SESSION['counter'] = 0;
+    echo "New session started.<br>";
+}
+
+// (c) Increment counter
+$_SESSION['counter']++;
+
+// (d) Store counter
+echo "You have visited this page " . $_SESSION['counter'] . " times.<br>";
+
+// (e) Link back with session id
+echo "<a href='q99.php?" . SID . "'>Reload Page</a><br>";
+
+// (f) File upload restriction
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $target = "uploads/" . basename($_FILES["file"]["name"]);
+    if (file_exists($target)) {
+        echo "<p style='color:red'>Error: File already exists!</p>";
+    } else {
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target);
+        echo "<p style='color:green'>File uploaded successfully!</p>";
+    }
+}
+?>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload File">
+</form>
+100. Using PHP, construct a program to restrict the user from uploading the same file again and again. 
+If the same file already exists in that folder, display an appropriate error message.
+<?php
+// Q.100: Prevent duplicate file upload
+
+$target = "uploads/" . basename($_FILES["file"]["name"]);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (file_exists($target)) {
+        echo "<h3 style='color:red'>File already exists. Try another file.</h3>";
+    } else {
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target);
+        echo "<h3 style='color:green'>File uploaded successfully.</h3>";
+    }
+}
+?>
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
+101. Identify, how a cookie’s value can be retrieved in a web application?
+<?php
+// Q.101: Cookie retrieval
+setcookie("user", "Madhunisha", time() + 3600); // 1 hour
+echo "<h2>Q.101: Cookie Value</h2>";
+if (isset($_COOKIE['user'])) {
+    echo "Cookie 'user' is set. Value = " . $_COOKIE['user'];
+} else {
+    echo "Cookie not set yet.";
+}
+?>
+102. Develop a PHP program to use session variables and start a session.
+<?php
+// Q.102: Using session variables
+session_start();
+
+$_SESSION['language'] = "PHP";
+$_SESSION['topic'] = "Session Variables";
+
+echo "<h2>Q.102: Using Sessions</h2>";
+echo "Language: " . $_SESSION['language'] . "<br>";
+echo "Topic: " . $_SESSION['topic'] . "<br>";
+?>
+OUTPUT:
+Q.102: Using Sessions
+Language: PHP
+Topic: Session Variables
+103. Create a very simple pageview counter by using ‘isset’ to check if the pageview variable hasalready been created.
+<?php
+// Q.103: Simple pageview counter using isset
+session_start();
+
+if (!isset($_SESSION['views'])) {
+    $_SESSION['views'] = 1;
+} else {
+    $_SESSION['views']++;
+}
+
+echo "<h2>Q.103 Page View Counter</h2>";
+echo "You have visited this page " . $_SESSION['views'] . " times.";
+?>
+OUTPUT:
+Q.103 Page View Counter
+You have visited this page 1 times.
+104. Formulate a PHP program to open a text file and print the nth line in the text file if then'th line does not exist print 'no data'. 
+<?php
+// Q.104: Print nth line from file
+$filename = "sample.txt";
+$n = 3; // Example: print 3rd line
+$lines = file($filename, FILE_IGNORE_NEW_LINES);
+if (isset($lines[$n-1])) {
+    echo "<h2>Q.104: Line $n</h2>";
+    echo $lines[$n-1];
+} else {
+    echo "No data";
+}
+?>
+OUTPUT:Q.104: Line 3
+Appending another line using fwrite.
+105. Write a PHP function to get the start and end date of a week (by week number) of a particular year. Sample week and year: 12, 2014.give me the answers for this in big code and covering the concept and give the output within
+<?php
+// Q.105: Start and End date of a week by year
+function getWeekDateRange($week, $year) {
+    $dto = new DateTime();
+    $dto->setISODate($year, $week);
+    $start = $dto->format('Y-m-d');
+    $dto->modify('+6 days');
+    $end = $dto->format('Y-m-d');
+    return [$start, $end];
+}
+list($start, $end) = getWeekDateRange(12, 2014);
+echo "<h2>Q.105: Week 12 of 2014</h2>";
+echo "Start Date: $start <br>";
+echo "End Date: $end";
+?>
+OUTPUT:
+Start Date: 2014-03-17
+End Date: 2014-03-23
+
 
 
 
